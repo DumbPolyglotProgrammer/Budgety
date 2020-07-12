@@ -18,3 +18,7 @@ https://developers.google.com/web/updates/2016/04/keyboardevent-keys-codes
 Article on "Why Use Prototype in JavaScript"
 <br>
 https://idiallo.com/javascript/why-use-prototypes
+
+Good article on DOM Manipulation
+<br>
+https://blog.garstasio.com/you-dont-need-jquery/dom-manipulation/
