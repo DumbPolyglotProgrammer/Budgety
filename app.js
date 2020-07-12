@@ -48,17 +48,21 @@ var UIController = (function () {
 // Global App Controller
 var Controller = (function (budgetController, uiController) {
 
-    var DOMElements = uiController.getDOMElements();
+    var setupEventListeners = function () {
 
-    document.querySelector(DOMElements.inputBtn).addEventListener('click', addEntry);
+        var DOMElements = uiController.getDOMElements();
 
-    document.addEventListener('keypress', function (event) {
-        if (event.code === 'Enter') {
-            addEntry();
-        }
-    });
+        document.querySelector(DOMElements.inputBtn).addEventListener('click', addEntry);
 
-    function addEntry() {
+        document.addEventListener('keypress', function (event) {
+            if (event.code === 'Enter') {
+                addEntry();
+            }
+        });
+
+    };
+
+    var addEntry = function () {
 
         //...
 
@@ -68,4 +72,15 @@ var Controller = (function (budgetController, uiController) {
 
     }
 
+    return {
+
+        init: function () {
+            //...
+            setupEventListeners();
+        }
+
+    };
+
 })(BudgetController, UIController);
+
+Controller.init();
