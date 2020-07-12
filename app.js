@@ -83,6 +83,17 @@ var UIController = (function () {
             };
         },
 
+        clearInput: function () {
+
+            var inputElements = document.querySelectorAll(DOMElements.inputDescription + ', ' + DOMElements.inputValue);
+            for (inputElement of inputElements) {
+                inputElement.value = '';
+            }
+
+            inputElements[0].focus();
+
+        },
+
         addEntry: function (type, entry) {
             var container, htmlElement;
 
@@ -142,7 +153,7 @@ var Controller = (function (budgetController, uiController) {
         uiController.addEntry(input.type, entry);
 
         // Clear the fields
-        // ...
+        uiController.clearInput();
 
         // Calculate and update budget
         // ...
