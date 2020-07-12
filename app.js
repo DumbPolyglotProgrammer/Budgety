@@ -146,20 +146,24 @@ var Controller = (function (budgetController, uiController) {
         // Get the field input data
         var input = uiController.getInput();
 
-        // Add the item to the budget controller
-        var entry = budgetController.addEntry(input.type, input.description, input.value);
+        if (input.description !== '' && !isNaN(input.value) && input.value > 0) {
 
-        // Add the item to the UI
-        uiController.addEntry(input.type, entry);
+            // Add the item to the budget controller
+            var entry = budgetController.addEntry(input.type, input.description, parseFloat(input.value));
 
-        // Clear the fields
-        uiController.clearInput();
+            // Add the item to the UI
+            uiController.addEntry(input.type, entry);
 
-        // Calculate and update budget
-        // ...
+            // Clear the fields
+            uiController.clearInput();
 
-        // Calculate and update percentages
-        // ...
+            // Calculate and update budget
+            // ...
+
+            // Calculate and update percentages
+            // ...
+
+        }
 
     }
 
@@ -173,5 +177,6 @@ var Controller = (function (budgetController, uiController) {
     };
 
 })(BudgetController, UIController);
+
 
 Controller.init();
