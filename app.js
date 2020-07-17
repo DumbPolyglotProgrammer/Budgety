@@ -25,6 +25,7 @@ var BudgetController = (function () {
         this.id = id;
         this.description = description;
         this.value = value;
+        this.percentage = -1;
     };
 
     var updateBudget = function () {
@@ -55,6 +56,17 @@ var BudgetController = (function () {
 
     };
 
+    var updateExpensePercentages = function () {
+
+        // sync total expense percentages
+        if (data.total.income > 0) {
+            data.entries.expense.forEach(function (entry) {
+                entry.percentage = Math.round((entry.value / data.total.income) * 100);
+            });
+        }
+
+    }
+
     return {
 
         addEntry: function (type, description, value) {
@@ -78,6 +90,8 @@ var BudgetController = (function () {
 
             updateBudget();
 
+            updateExpensePercentages();
+
             return entry;
         },
 
@@ -91,10 +105,18 @@ var BudgetController = (function () {
 
             updateBudget();
 
+            updateExpensePercentages();
+
         },
 
         getBudget: function () {
             return data.total;
+        },
+
+        getExpensePercentages: function () {
+            return data.entries.expense.map(function (entry) {
+                return entry.percentage
+            });
         }
 
     };
@@ -198,6 +220,19 @@ var UIController = (function () {
 
         },
 
+        updateExpensePercentages: function (percentages) {
+
+            var expensePercentageElements = document.querySelectorAll(DOMElements.expensesPercLabel)
+            expensePercentageElements.forEach(function (expensePercentageElement, index) {
+                if (percentages[index] > 0) {
+                    expensePercentageElement.textContent = percentages[index] + '%';
+                } else {
+                    expensePercentageElement.textContent = '---';
+                }
+            });
+
+        },
+
         getDOMElements: function () {
             return DOMElements;
         }
@@ -254,8 +289,8 @@ var Controller = (function (budgetController, uiController) {
             // Update budget in the UI
             uiController.updateBudget(budgetController.getBudget());
 
-            // Calculate and update percentages
-            // ...
+            // Update expense percentages in the UI
+            uiController.updateExpensePercentages(budgetController.getExpensePercentages());
 
         }
 
@@ -272,8 +307,8 @@ var Controller = (function (budgetController, uiController) {
         // Update budget in the UI
         uiController.updateBudget(budgetController.getBudget());
 
-        // Calculate and update percentages
-        // ...
+        // Update expense percentages in the UI
+        uiController.updateExpensePercentages(budgetController.getExpensePercentages());
 
     };
 
