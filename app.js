@@ -139,8 +139,7 @@ var UIController = (function () {
         expensesLabel: '.budget__expenses--value',
         percentageLabel: '.budget__expenses--percentage',
         container: '.container',
-        expensesPercLabel: '.item__percentage',
-        dateLabel: '.budget__title--month'
+        expensesPercLabel: '.item__percentage'
     };
 
     var HTMLElements = {
@@ -175,6 +174,16 @@ var UIController = (function () {
             }
 
             inputElements[0].focus();
+
+        },
+
+        toggleInput: function () {
+
+            var inputElements = document.querySelectorAll(DOMElements.inputType + ', ' + DOMElements.inputDescription + ', ' + DOMElements.inputValue);
+            for (inputElement of inputElements) {
+                inputElement.classList.toggle('red-focus');
+            }
+            document.querySelector(DOMElements.inputBtn).classList.toggle('red');
 
         },
 
@@ -267,6 +276,8 @@ var Controller = (function (budgetController, uiController) {
             deleteEntry(type, id);
 
         });
+
+        document.querySelector(DOMElements.inputType).addEventListener('change', uiController.toggleInput);
 
     };
 
