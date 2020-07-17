@@ -315,11 +315,8 @@ var Controller = (function (budgetController, uiController) {
     return {
 
         init: function () {
-
             uiController.init();
-
             setupEventListeners();
-
         }
 
     };
