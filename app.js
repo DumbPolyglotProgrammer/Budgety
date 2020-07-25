@@ -270,10 +270,9 @@ const Controller = ((budgetController, uiController) => {
 
             const itemId = event.target.parentNode.parentNode.parentNode.parentNode.id;
 
-            const type = itemId.split('-')[0];
-            const id = parseInt(itemId.split('-')[1]);
+            const [type, id] = itemId.split('-');
 
-            deleteEntry(type, id);
+            deleteEntry(type, parseInt(id));
 
         });
 
