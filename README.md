@@ -1,4 +1,12 @@
 
+Good and quick video on call() apply() bind() methods
+<br>
+https://youtu.be/rZc7_2YXbP8
+
+Awesome document on `this` in JavaScript
+<br>
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this
+
 Good article on Prototypes
 <br>
 https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes
