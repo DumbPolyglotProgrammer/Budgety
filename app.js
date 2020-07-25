@@ -168,7 +168,7 @@ const UIController = (function () {
 
         clearInput: function () {
 
-            const inputElements = document.querySelectorAll(DOMElements.inputDescription + ', ' + DOMElements.inputValue);
+            const inputElements = document.querySelectorAll(`${DOMElements.inputDescription},${DOMElements.inputValue}`);
             for (inputElement of inputElements) {
                 inputElement.value = '';
             }
@@ -179,7 +179,7 @@ const UIController = (function () {
 
         toggleInput: function () {
 
-            const inputElements = document.querySelectorAll(DOMElements.inputType + ', ' + DOMElements.inputDescription + ', ' + DOMElements.inputValue);
+            const inputElements = document.querySelectorAll(`${DOMElements.inputType},${DOMElements.inputDescription},${DOMElements.inputValue}`);
             for (inputElement of inputElements) {
                 inputElement.classList.toggle('red-focus');
             }
@@ -222,7 +222,7 @@ const UIController = (function () {
             document.querySelector(DOMElements.expensesLabel).textContent = budget.expense;
 
             if (budget.expensePercentage > 0) {
-                document.querySelector(DOMElements.percentageLabel).textContent = budget.expensePercentage + '%';
+                document.querySelector(DOMElements.percentageLabel).textContent = `${budget.expensePercentage}%`;
             } else {
                 document.querySelector(DOMElements.percentageLabel).textContent = '---';
             }
@@ -234,7 +234,7 @@ const UIController = (function () {
             const expensePercentageElements = document.querySelectorAll(DOMElements.expensesPercLabel)
             expensePercentageElements.forEach(function (expensePercentageElement, index) {
                 if (percentages[index] > 0) {
-                    expensePercentageElement.textContent = percentages[index] + '%';
+                    expensePercentageElement.textContent = `${percentages[index]}%`;
                 } else {
                     expensePercentageElement.textContent = '---';
                 }
@@ -313,7 +313,7 @@ const Controller = (function (budgetController, uiController) {
         budgetController.deleteEntry(type, id);
 
         // Delete the item from the UI
-        uiController.deleteEntry(type + '-' + id);
+        uiController.deleteEntry(`${type}-${id}`);
 
         // Update budget in the UI
         uiController.updateBudget(budgetController.getBudget());
