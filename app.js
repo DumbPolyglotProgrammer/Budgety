@@ -15,18 +15,22 @@ const BudgetController = (() => {
         }
     };
 
-    const Income = function (id, description, value) {
-        this.id = id;
-        this.description = description;
-        this.value = value;
-    };
+    class Income {
+        constructor(id, description, value) {
+            this.id = id;
+            this.description = description;
+            this.value = value;
+        }
+    }
 
-    const Expense = function (id, description, value) {
-        this.id = id;
-        this.description = description;
-        this.value = value;
-        this.percentage = -1;
-    };
+    class Expense {
+        constructor(id, description, value) {
+            this.id = id;
+            this.description = description;
+            this.value = value;
+            this.percentage = -1;
+        }
+    }
 
     const updateBudget = () => {
 
