@@ -1,8 +1,8 @@
 
 // BudgetController
-var BudgetController = (function () {
+const BudgetController = (function () {
 
-    var data = {
+    const data = {
         total: {
             budget: 0,
             income: 0,
@@ -15,30 +15,30 @@ var BudgetController = (function () {
         }
     };
 
-    var Income = function (id, description, value) {
+    const Income = function (id, description, value) {
         this.id = id;
         this.description = description;
         this.value = value;
     };
 
-    var Expense = function (id, description, value) {
+    const Expense = function (id, description, value) {
         this.id = id;
         this.description = description;
         this.value = value;
         this.percentage = -1;
     };
 
-    var updateBudget = function () {
+    const updateBudget = function () {
 
         // sync total income
-        var totalIncome = 0;
+        let totalIncome = 0;
         data.entries.income.forEach(function (entry) {
             totalIncome += entry.value;
         });
         data.total.income = totalIncome;
 
         // sync total expense
-        var totalExpense = 0;
+        let totalExpense = 0;
         data.entries.expense.forEach(function (entry) {
             totalExpense += entry.value;
         });
@@ -56,7 +56,7 @@ var BudgetController = (function () {
 
     };
 
-    var updateExpensePercentages = function () {
+    const updateExpensePercentages = function () {
 
         // sync total expense percentages
         if (data.total.income > 0) {
@@ -70,9 +70,9 @@ var BudgetController = (function () {
     return {
 
         addEntry: function (type, description, value) {
-            var entry;
+            let entry;
 
-            var id = 0;
+            let id = 0;
             if (data.entries[type].length > 0) {
                 id = data.entries[type][data.entries[type].length - 1].id + 1;
             }
@@ -125,9 +125,9 @@ var BudgetController = (function () {
 
 
 // UIController
-var UIController = (function () {
+const UIController = (function () {
 
-    var DOMElements = {
+    const DOMElements = {
         inputType: '.add__type',
         inputDescription: '.add__description',
         inputValue: '.add__value',
@@ -142,7 +142,7 @@ var UIController = (function () {
         expensesPercLabel: '.item__percentage'
     };
 
-    var HTMLElements = {
+    const HTMLElements = {
         income: '<div class="item clearfix" id="income-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>',
         expense: '<div class="item clearfix" id="expense-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
     };
@@ -168,7 +168,7 @@ var UIController = (function () {
 
         clearInput: function () {
 
-            var inputElements = document.querySelectorAll(DOMElements.inputDescription + ', ' + DOMElements.inputValue);
+            const inputElements = document.querySelectorAll(DOMElements.inputDescription + ', ' + DOMElements.inputValue);
             for (inputElement of inputElements) {
                 inputElement.value = '';
             }
@@ -179,7 +179,7 @@ var UIController = (function () {
 
         toggleInput: function () {
 
-            var inputElements = document.querySelectorAll(DOMElements.inputType + ', ' + DOMElements.inputDescription + ', ' + DOMElements.inputValue);
+            const inputElements = document.querySelectorAll(DOMElements.inputType + ', ' + DOMElements.inputDescription + ', ' + DOMElements.inputValue);
             for (inputElement of inputElements) {
                 inputElement.classList.toggle('red-focus');
             }
@@ -188,7 +188,7 @@ var UIController = (function () {
         },
 
         addEntry: function (type, entry) {
-            var container, htmlElement;
+            let container, htmlElement;
 
             switch (type) {
                 case 'income':
@@ -210,7 +210,7 @@ var UIController = (function () {
 
         deleteEntry: function (htmlElementId) {
 
-            var element = document.getElementById(htmlElementId);
+            const element = document.getElementById(htmlElementId);
             element.parentNode.removeChild(element);
 
         },
@@ -231,7 +231,7 @@ var UIController = (function () {
 
         updateExpensePercentages: function (percentages) {
 
-            var expensePercentageElements = document.querySelectorAll(DOMElements.expensesPercLabel)
+            const expensePercentageElements = document.querySelectorAll(DOMElements.expensesPercLabel)
             expensePercentageElements.forEach(function (expensePercentageElement, index) {
                 if (percentages[index] > 0) {
                     expensePercentageElement.textContent = percentages[index] + '%';
@@ -252,11 +252,11 @@ var UIController = (function () {
 
 
 // Global App Controller
-var Controller = (function (budgetController, uiController) {
+const Controller = (function (budgetController, uiController) {
 
-    var setupEventListeners = function () {
+    const setupEventListeners = function () {
 
-        var DOMElements = uiController.getDOMElements();
+        const DOMElements = uiController.getDOMElements();
 
         document.querySelector(DOMElements.inputBtn).addEventListener('click', addEntry);
 
@@ -268,10 +268,10 @@ var Controller = (function (budgetController, uiController) {
 
         document.querySelector(DOMElements.container).addEventListener('click', function (event) {
 
-            var itemId = event.target.parentNode.parentNode.parentNode.parentNode.id;
+            const itemId = event.target.parentNode.parentNode.parentNode.parentNode.id;
 
-            var type = itemId.split('-')[0];
-            var id = parseInt(itemId.split('-')[1]);
+            const type = itemId.split('-')[0];
+            const id = parseInt(itemId.split('-')[1]);
 
             deleteEntry(type, id);
 
@@ -281,15 +281,15 @@ var Controller = (function (budgetController, uiController) {
 
     };
 
-    var addEntry = function () {
+    const addEntry = function () {
 
         // Get the field input data
-        var input = uiController.getInput();
+        const input = uiController.getInput();
 
         if (input.description !== '' && !isNaN(input.value) && input.value > 0) {
 
             // Add the item to the budget controller
-            var entry = budgetController.addEntry(input.type, input.description, parseFloat(input.value));
+            const entry = budgetController.addEntry(input.type, input.description, parseFloat(input.value));
 
             // Add the item to the UI
             uiController.addEntry(input.type, entry);
@@ -307,7 +307,7 @@ var Controller = (function (budgetController, uiController) {
 
     };
 
-    var deleteEntry = function (type, id) {
+    const deleteEntry = function (type, id) {
 
         // Delete the item from the budget controller
         budgetController.deleteEntry(type, id);

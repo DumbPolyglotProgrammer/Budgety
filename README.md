@@ -1,5 +1,5 @@
 
-Good Article on Prototypes
+Good article on Prototypes
 <br>
 https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes
 
@@ -22,3 +22,10 @@ https://idiallo.com/javascript/why-use-prototypes
 Good article on DOM Manipulation
 <br>
 https://blog.garstasio.com/you-dont-need-jquery/dom-manipulation/
+
+
+### ES-6
+
+Good article on var, let, and const
+<br>
+https://www.freecodecamp.org/news/var-let-and-const-whats-the-difference/
